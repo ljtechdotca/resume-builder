@@ -1,0 +1,14 @@
+.root {
+  border-bottom: 1px solid #f8f8f8;
+}
+
+.base {
+  margin: auto;
+  padding: 0.5rem 1rem;
+  max-width: 85rem;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}

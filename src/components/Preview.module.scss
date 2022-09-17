@@ -1,0 +1,8 @@
+.root {
+  position: absolute;
+  height: calc(11rem * 5.75);
+  width: calc(8.5rem * 5.75);
+  box-shadow: 0px 0px 6px 0px rgba($color: #e0e0e0, $alpha: 0.5);
+  background-color: white;
+  transform: scale(0.5);
+}

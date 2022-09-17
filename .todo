@@ -1,0 +1,44 @@
+forms:
+    ✔ work history / education @done(22-09-16 12:29)
+    ✔ contact socials @done(22-09-16 12:29)
+    ✔ skills form @done(22-09-16 15:19)
+
+features:
+    ✔ download as .pdf @done(22-09-16 15:19)
+        find a package or something that can handle this for me :)
+
+other:     
+    form inputs:
+        ✔ add minLength, maxLength, required, and any other optional attributes for form values @done(22-09-17 15:27)
+        ☐ startDate vs. endDate, startEnd cannot be greater than endDate, endDate cannot be less than startDate
+
+    ui:
+        ✔ scroll snap containers for the forms @done(22-09-17 16:04)
+
+        ✔ header design @done(22-09-17 16:05)
+
+        ✔ CTRL + P keybind @done(22-09-17 16:12)
+
+        ☐ defaultValues inside the fields.ts AKA FormFields does nothing to the initial form store
+
+        ☐ remove useless form buttons (on change)
+
+        ☐ responsive design
+            cant view the website on anything smaller than a desktop
+        
+        ✔ default values are still missing on the skills @done(22-09-17 13:42)
+            address phone & email
+
+    forms:
+        ☐ improve overall user experience
+            make it easier to fill the resume, use visual indications of missing required fields
+
+    ui:
+        ✔ SimpleColumn CV undefined values @done(22-09-16 16:30)
+            things like the contact address shows floating commas when no data is present
+            resume looks boring when nothing is filled out, maybe have some default data that takes its place and is greyed out?
+
+        ✔ Preview is much larger than the "printed" pdf version @done(22-09-17 14:41)
+            things such as fontsize and the layout change between printed and preview versiosn
+            this is because the preview doesn't use exact sizes, and the text size remains the same between both versions
+            fixing the preview layout dimensions will fix this (and then using transform scale on top of it) 

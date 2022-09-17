@@ -1,0 +1,76 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: 100%;
+  overflow: hidden;
+  word-break: break-word;
+  white-space: break-spaces;
+  aside {
+    max-width: 320px;
+    background-color: dodgerblue;
+    color: white;
+    h2 {
+      font-size: 20px;
+    }
+  }
+}
+
+.base {
+  padding: 1rem;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.header {
+  padding: 1rem;
+  display: grid;
+  gap: 0.5rem;
+  h1 {
+    line-height: 0.95;
+    font-size: 24px;
+  }
+  h2 {
+    font-weight: 400;
+  }
+}
+
+.card {
+  h2 {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 1rem;
+  }
+  &__base {
+    padding: 0.5rem 1rem 1rem;
+    display: grid;
+    gap: 0.5rem;
+  }
+  &__item {
+  }
+}
+
+.mainItem {
+  display: grid;
+  gap: 0.5rem;
+  h2 {
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    padding: 0.5rem 0;
+  }
+  &_list {
+    list-style-type: unset;
+    padding: unset;
+    display: grid;
+    gap: 0.5rem;
+  }
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  &_base {
+    display: grid;
+    gap: 0.5rem;
+  }
+}
