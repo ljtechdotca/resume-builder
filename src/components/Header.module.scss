@@ -1,11 +1,12 @@
 .root {
+  box-shadow: 0px 0px 6px 0px rgba($color: #e0e0e0, $alpha: 0.5);
   border-bottom: 1px solid #f8f8f8;
 }
 
 .base {
   margin: auto;
   padding: 0.5rem 1rem;
-  max-width: 85rem;
+  max-width: 1400px;
   align-items: center;
   display: flex;
   justify-content: space-between;

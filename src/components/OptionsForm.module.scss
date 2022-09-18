@@ -1,0 +1,66 @@
+.root {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid #f8f8f8;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 3px 0 #f8f8f8;
+}
+
+.field {
+  display: grid;
+  font-size: 12px;
+}
+
+.colors {
+  overflow: hidden;
+  background-color: #fefefe;
+  border-radius: 0.25rem;
+  border: 1px solid #f8f8f8;
+  display: flex;
+}
+
+.color {
+  padding: 0;
+  display: grid;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: unset;
+  border-radius: unset;
+  &__red {
+    @extend .color;
+    background-color: red;
+  }
+  &__orange {
+    @extend .color;
+    background-color: orange;
+  }
+  &__yellow {
+    @extend .color;
+    background-color: yellow;
+  }
+  &__green {
+    @extend .color;
+    background-color: green;
+  }
+  &__blue {
+    @extend .color;
+    background-color: dodgerblue;
+  }
+  &__purple {
+    @extend .color;
+    background-color: purple;
+  }
+}
+
+.component {
+  padding: 1rem;
+  display: grid;
+  place-items: center center;
+  img {
+    object-fit: contain;
+    background-color: white;
+    border: 1px dashed #f8f8f8;
+  }
+}

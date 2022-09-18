@@ -1,11 +1,17 @@
-interface FormFields {
-  defaultValues: Record<string, any>;
-  inputs: InputProps[];
-}
+export const layoutSizes: Record<LayoutType, LayoutProps> = {
+  card: {
+    height: 2,
+    width: 3.5,
+  },
+  cv: {
+    height: 11,
+    width: 8.5,
+  },
+};
 
 export const userFields: FormFields = {
   defaultValues: {
-    firstName: "🎈🎈🎈🎈🎈🎈🎈🎈🎈🎈",
+    firstName: "🎈🎈🎈🎈 HELLO WORLD 🎈🎈🎈🎈🎈",
     lastName: "",
     title: "",
     summary: "",
@@ -42,20 +48,6 @@ export const userFields: FormFields = {
       target: "summary",
       minLength: 100,
       maxLength: 500,
-    },
-  ],
-};
-
-export const optionsFields: FormFields = {
-  defaultValues: {
-    color: "#05a05a",
-  },
-  inputs: [
-    {
-      label: "Primary Color",
-      name: "primaryColor",
-      type: "color",
-      target: "primaryColor",
     },
   ],
 };

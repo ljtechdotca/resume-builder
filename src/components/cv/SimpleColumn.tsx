@@ -82,13 +82,14 @@ const MainItem: FC<MainItemProps> = ({ title, list }) => {
 };
 
 interface CVProps {
-  ref: ForwardedRef<HTMLDivElement>;
+  ref?: ForwardedRef<HTMLDivElement>;
 }
 
 export const SimpleColumn: FC<CVProps> = forwardRef<HTMLDivElement, CVProps>(
   (_, ref) => {
     const {
       store: {
+        primaryColor,
         contact: { city, state, zipCode, email, phone, socials },
         education,
         experiences,
@@ -111,7 +112,7 @@ export const SimpleColumn: FC<CVProps> = forwardRef<HTMLDivElement, CVProps>(
 
     return (
       <div className={styles.root} ref={ref}>
-        <aside>
+        <aside style={{ backgroundColor: primaryColor ?? "dodgerblue" }}>
           <div className={styles.header}>
             <h1>
               {checkValue(
@@ -143,8 +144,8 @@ export const SimpleColumn: FC<CVProps> = forwardRef<HTMLDivElement, CVProps>(
               },
               { title: "Phone", content: checkValue("Phone", phone) },
               { title: "Email", content: checkValue("Email", email) },
-              ...Object.keys(socials).map((key) => ({
-                title: key,
+              ...Object.keys(socials).map((key, index) => ({
+                title: key + index,
                 content: socials[key],
               })),
             ]}

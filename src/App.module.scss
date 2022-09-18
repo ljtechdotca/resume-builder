@@ -1,7 +1,11 @@
 .root {
+  position: relative;
+}
+
+.base {
   margin: auto;
   padding: 1rem;
-  max-width: calc(8.5rem * 10);
+  max-width: 1400px;
   display: grid;
   grid-template-rows: 1fr 1fr;
   @media (min-width: 1400px) {
@@ -10,31 +14,18 @@
   }
 }
 
-.base {
+.scroll {
   padding: 1rem;
   display: grid;
   gap: 1rem;
-  &__scroll {
-    @extend .base;
-    border: 1px solid #f8f8f8;
-    border-radius: 0.5rem;
-    scroll-padding: 1rem;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    height: calc(100vh - 5rem);
-    @media (min-width: 1400px) {
-      border-radius: 0.5rem 0 0 0.5rem;
-    }
-  }
-  &__fixed {
-    @extend .base;
-    position: relative;
-    border-radius: 0 0.5rem 0.5rem 0;
-    border-top: 1px solid #f8f8f8;
-    border-right: 1px solid #f8f8f8;
-    border-bottom: 1px solid #f8f8f8;
-    place-items: center center;
-    pointer-events: none;
+  border: 1px solid #f8f8f8;
+  border-radius: 0.5rem;
+  scroll-padding: 1rem;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  height: calc(100vh - 5rem);
+  @media (min-width: 1400px) {
+    border-radius: 0.5rem 0 0 0.5rem;
   }
 }
 

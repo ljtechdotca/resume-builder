@@ -10,20 +10,26 @@ import {
 import { FieldValues } from "react-hook-form";
 import { useReactToPrint } from "react-to-print";
 import styles from "./App.module.scss";
+import { SimpleCard } from "./components/cards/SimpleCard";
 import { SimpleColumn } from "./components/cv/SimpleColumn";
 import { Form } from "./components/Form";
 import { Header } from "./components/Header";
+import { Modal } from "./components/Modal";
+import { OptionsForm } from "./components/OptionsForm";
 import { Preview } from "./components/Preview";
 import {
   contactFields,
   dateRangeFields,
-  optionsFields,
   skillsFields,
   socialsFields,
   userFields,
-} from "./lib/fields";
+} from "./lib/defaults";
 
-const defaultResume: ResumeProps = {
+const defaultResume: StoreProps = {
+  layout: "cv",
+  zoomed: false,
+  primaryColor: null,
+  secondaryColor: null,
   contact: {
     city: null,
     state: null,
@@ -43,17 +49,16 @@ const defaultResume: ResumeProps = {
 };
 
 export const StoreContext = createContext<{
-  store: ResumeProps;
-  setStore: Dispatch<SetStateAction<ResumeProps>>;
+  store: StoreProps;
+  setStore: Dispatch<SetStateAction<StoreProps>>;
 }>({ store: defaultResume, setStore: () => {} });
 
 function App() {
-  const [store, setStore] = useState<ResumeProps>(defaultResume);
+  const [store, setStore] = useState<StoreProps>(defaultResume);
 
-  function handleChange(target: string, value: string) {
+  function handleChange(path: string, value: any) {
     const newStore = { ...store };
-    console.log(newStore);
-    set(newStore, target, value);
+    set(newStore, path, value);
     setStore(newStore);
   }
 
@@ -80,6 +85,12 @@ function App() {
       event.preventDefault();
       handlePrint();
     }
+    if (event.key === "-") {
+      zoomOut();
+    }
+    if (event.key === "=") {
+      zoomIn();
+    }
   }
 
   useEffect(() => {
@@ -93,14 +104,21 @@ function App() {
   const printRef = useRef<HTMLDivElement>(null);
   const handlePrint = useReactToPrint({ content: () => printRef.current });
 
+  function zoomIn() {
+    setStore((curr) => ({ ...curr, scale: 1 }));
+  }
+  function zoomOut() {
+    setStore((curr) => ({ ...curr, scale: 0.5 }));
+  }
+
   return (
     <StoreContext.Provider value={{ store, setStore }}>
-      <div>
+      <div className={styles.root}>
         <Header onPrint={handlePrint} />
-        <main className={styles.root}>
-          <div className={styles.base__scroll}>
+        <main className={styles.base}>
+          <div className={styles.scroll}>
             <div className={styles.item}>
-              <Form title="Options" fields={optionsFields} />
+              <OptionsForm />
             </div>
             <div className={styles.item}>
               <Form title="User" fields={userFields} onChange={handleChange} />
@@ -145,12 +163,19 @@ function App() {
               />
             </div>
           </div>
-          <div className={styles.base__fixed}>
-            <Preview>
-              <SimpleColumn ref={printRef} />
-            </Preview>
-          </div>
+          <Preview
+            onZoomIn={() => handleChange("zoomed", true)}
+          >
+            {store.layout === "card" && <SimpleCard ref={printRef} />}
+            {store.layout === "cv" && <SimpleColumn ref={printRef} />}
+          </Preview>
         </main>
+        {store.zoomed && (
+          <Modal onZoomOut={() => handleChange("zoomed", false)}>
+            {store.layout === "card" && <SimpleCard />}
+            {store.layout === "cv" && <SimpleColumn />}
+          </Modal>
+        )}
       </div>
     </StoreContext.Provider>
   );

@@ -17,6 +17,8 @@ interface Item {
 //   location: string;
 // }
 
+type LayoutType = "card" | "cv";
+
 interface FormProps {
   title: string;
   fields: {
@@ -48,7 +50,21 @@ interface ContactProps {
   };
 }
 
-interface ResumeProps {
+interface FormFields {
+  defaultValues: Record<string, any>;
+  inputs: InputProps[];
+}
+
+interface LayoutProps {
+  height: number;
+  width: number;
+}
+
+interface StoreProps {
+  layout: LayoutType;
+  zoomed: boolean;
+  primaryColor: string | null;
+  secondaryColor: string | null;
   firstName: string | null;
   lastName: string | null;
   title: string | null;
