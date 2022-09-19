@@ -3,14 +3,6 @@ other:
         ☐ startDate vs. endDate, startEnd cannot be greater than endDate, endDate cannot be less than startDate
 
     ui:
-        ✔ options form color works @done(22-09-17 16:32)
-
-        ✔ options form layout types @done(22-09-18 16:02)
-        
-        ✔ defaultValues inside the defaults.ts AKA FormFields does nothing to the initial form store @done(22-09-18 16:48)
-
-        ✔ zoom into the preview / hide preview @done(22-09-18 15:32)
-
         ☐ responsive design
             cant view the website on anything smaller than a desktop
 
@@ -26,6 +18,4 @@ other:
         ☐ remove useless form buttons (on change)
 
     other:
-        ✔ create a business card component @done(22-09-18 16:48)
-
-        create another cv component
+        ☐ create another cv component
