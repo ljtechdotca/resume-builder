@@ -1,33 +1,35 @@
 import { FC, ForwardedRef, forwardRef, useContext } from "react";
 import { StoreContext } from "../../App";
+import { checkValue } from "../../lib/check-value";
 import styles from "./SimpleColumn.module.scss";
 
 interface AsideItemProps {
   title: string;
-  list: Item[];
+  items: Record<string, Item>;
+  onDelete: (...path: string[]) => void;
 }
 
-const AsideItem: FC<AsideItemProps> = ({ title, list }) => {
+const AsideItem: FC<AsideItemProps> = ({ title, items, onDelete }) => {
+  const keys = Object.keys(items);
+
   return (
-    <div className={styles.card}>
+    <div className={styles.asideItem}>
       <h2>{title}</h2>
-      <div className={styles.card__base}>
-        {list.length
-          ? list.map(({ title, content }) => (
-              <div key={title + content} className={styles.card__item}>
-                <h5>{title}</h5>
-                {content && content}
-              </div>
-            ))
-          : new Array(4).fill("_").map((item, index) => (
-              <div
-                key={item + index}
-                className={styles.card__item}
-                style={{ opacity: "0.25" }}
-              >
-                <h5>Name of skill here</h5>
-              </div>
-            ))}
+      <div className={styles.asideItem__items}>
+        {keys.map((key) => {
+          const { title, content, required } = items[key];
+          return (
+            <div key={key} className={styles.asideItem__item}>
+              <h5>{title}</h5>
+              {content && content}
+              {!required && (
+                <button className="close" onClick={() => onDelete(title)}>
+                  X
+                </button>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -35,37 +37,53 @@ const AsideItem: FC<AsideItemProps> = ({ title, list }) => {
 
 interface MainItemProps {
   title: string;
-  list: Item[];
+  items: Record<string, Item>;
+  onDelete: (...path: string[]) => void;
 }
 
-const MainItem: FC<MainItemProps> = ({ title, list }) => {
+const MainItem: FC<MainItemProps> = ({ title, items, onDelete }) => {
+  const keys = Object.keys(items);
+
+  const {
+    store: { isEditing },
+  } = useContext(StoreContext);
+
   return (
     <div className={styles.mainItem}>
       <h2>{title}</h2>
-      {list.length ? (
-        list.map(({ title, location, position, startDate, endDate, list }) => (
-          <div key={title} className={styles.item}>
-            <small>
-              {startDate} - {endDate}
-            </small>
-            <div className={styles.item_base}>
-              <h4>
-                {title} - <i>{position}</i>
-              </h4>
-              <p>
-                <i>{location}</i>
-              </p>
-              <ul>
-                {list &&
-                  list.map((item: Item) => <li key={title}>{item.title}</li>)}
-              </ul>
+      {keys.length ? (
+        keys.map((key) => {
+          const { title, location, position, startDate, endDate, list } =
+            items[key];
+          return (
+            <div key={title} className={styles.item}>
+              <small>
+                {startDate} - {endDate}
+              </small>
+              <div className={styles.grid}>
+                <h4>
+                  {title} - <i>{position}</i>
+                </h4>
+                <p>
+                  <i>{location}</i>
+                </p>
+                <ul>
+                  {list &&
+                    list.map((item: Item) => <li key={title}>{item.title}</li>)}
+                </ul>
+              </div>
+              {isEditing && (
+                <button className="close" onClick={() => onDelete(title)}>
+                  X
+                </button>
+              )}
             </div>
-          </div>
-        ))
+          );
+        })
       ) : (
-        <div key={title} className={styles.item} style={{ opacity: "0.25" }}>
+        <div key={title} className={styles.item__default}>
           <small>MM/DD/YYYY - MM/DD/YYYY</small>
-          <div className={styles.item_base}>
+          <div className={styles.grid}>
             <h4>Company - Job Position</h4>
             <p>
               <i>Location</i>
@@ -83,14 +101,22 @@ const MainItem: FC<MainItemProps> = ({ title, list }) => {
 
 interface CVProps {
   ref?: ForwardedRef<HTMLDivElement>;
+  onDelete: (...path: string[]) => void;
+  // primaryColor: string,
+  // city: string,
+  // state: string,
+  // zipCode: string,
+  // email: string,
+  // phone: string,
+  // urls:
 }
 
 export const SimpleColumn: FC<CVProps> = forwardRef<HTMLDivElement, CVProps>(
-  (_, ref) => {
+  ({ onDelete }, ref) => {
     const {
       store: {
         primaryColor,
-        contact: { city, state, zipCode, email, phone, socials },
+        contact: { city, state, zipCode, email, phone, urls },
         education,
         experiences,
         firstName,
@@ -102,55 +128,44 @@ export const SimpleColumn: FC<CVProps> = forwardRef<HTMLDivElement, CVProps>(
       },
     } = useContext(StoreContext);
 
-    function checkValue(defaultValue: string, value: string | null) {
-      return value ? (
-        value
-      ) : (
-        <span style={{ opacity: "0.25" }}>{defaultValue}</span>
-      );
-    }
-
     return (
       <div className={styles.root} ref={ref}>
         <aside style={{ backgroundColor: primaryColor ?? "dodgerblue" }}>
           <div className={styles.header}>
             <h1>
-              {checkValue(
-                "FirstNameFirstNameFirstNameFirstNameFirstNameFirstNameFirstNameFirstName",
-                firstName
-              )}
+              {checkValue("First Name", firstName)}
               <br />
-              {checkValue(
-                "LastNameLastNameLastNameLastNameLastNameLastNameLastName",
-                lastName
-              )}
+              {checkValue("Last Name", lastName)}
             </h1>
             <h2>{checkValue("Professional Title", title)}</h2>
           </div>
           <AsideItem
             title="Contact"
-            list={[
-              {
-                title: "City",
-                content: checkValue("City", city),
+            items={{
+              Phone: {
+                title: "Phone",
+                content: phone,
+                required: true,
               },
-              {
-                title: "State",
-                content: checkValue("State", state),
+              Email: {
+                title: "Email",
+                content: email,
+                required: true,
               },
-              {
-                title: "Zip Code",
-                content: checkValue("Zip Code", zipCode),
+              Address: {
+                title: "Address",
+                content: `${city}, ${state}, ${zipCode}`,
+                required: true,
               },
-              { title: "Phone", content: checkValue("Phone", phone) },
-              { title: "Email", content: checkValue("Email", email) },
-              ...Object.keys(socials).map((key, index) => ({
-                title: key + index,
-                content: socials[key],
-              })),
-            ]}
+              ...urls,
+            }}
+            onDelete={(path) => onDelete("contact.urls", path)}
           />
-          <AsideItem title="Skills" list={skills} />
+          <AsideItem
+            title="Skills"
+            items={skills}
+            onDelete={(path) => onDelete("skills", path)}
+          />
         </aside>
         <div className={styles.base}>
           <p>
@@ -159,8 +174,16 @@ export const SimpleColumn: FC<CVProps> = forwardRef<HTMLDivElement, CVProps>(
               summary
             )}
           </p>
-          <MainItem title="Work History" list={experiences} />
-          <MainItem title="Education" list={education} />
+          <MainItem
+            title="Work History"
+            items={experiences}
+            onDelete={(path) => onDelete("experiences", path)}
+          />
+          <MainItem
+            title="Education"
+            items={education}
+            onDelete={(path) => onDelete("education", path)}
+          />
         </div>
       </div>
     );

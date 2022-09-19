@@ -1,5 +1,4 @@
 .root {
-  
   display: grid;
   grid-template-columns: 1fr 2fr;
   height: 100%;
@@ -37,17 +36,18 @@
   }
 }
 
-.card {
+.asideItem {
   h2 {
     background-color: rgba(0, 0, 0, 0.1);
     padding: 0.5rem 1rem;
   }
-  &__base {
+  &__items {
     padding: 0.5rem 1rem 1rem;
     display: grid;
     gap: 0.5rem;
   }
   &__item {
+    position: relative;
   }
 }
 
@@ -59,19 +59,19 @@
     border-bottom: 1px solid black;
     padding: 0.5rem 0;
   }
-  &_list {
-    list-style-type: unset;
-    padding: unset;
-    display: grid;
-    gap: 0.5rem;
-  }
 }
 
 .item {
+  position: relative;
   display: flex;
   justify-content: space-between;
-  &_base {
-    display: grid;
-    gap: 0.5rem;
+  &__default {
+    @extend .item;
+    opacity: 0.25;
   }
+}
+
+.grid {
+  display: grid;
+  gap: 0.5rem;
 }

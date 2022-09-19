@@ -7,20 +7,25 @@ other:
 
         ✔ options form layout types @done(22-09-18 16:02)
         
-        ☐ defaultValues inside the fields.ts AKA FormFields does nothing to the initial form store
+        ✔ defaultValues inside the defaults.ts AKA FormFields does nothing to the initial form store @done(22-09-18 16:48)
 
         ✔ zoom into the preview / hide preview @done(22-09-18 15:32)
-
-        ☐ remove useless form buttons (on change)
 
         ☐ responsive design
             cant view the website on anything smaller than a desktop
 
+        ☐ create a diaglog box for modal
+
     forms:
+
+        ☐ reduce the weird functions
+
         ☐ improve overall user experience
             make it easier to fill the resume, use visual indications of missing required fields
 
+        ☐ remove useless form buttons (on change)
+
     other:
-        create a business card component
+        ✔ create a business card component @done(22-09-18 16:48)
 
         create another cv component

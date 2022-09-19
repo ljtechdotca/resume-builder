@@ -19,12 +19,10 @@ export const Form: FC<FormProps> = ({
   } = useForm({ defaultValues, mode: "onChange" });
 
   function handleSuccess(data: FieldValues) {
-    console.log("Form success!", data);
     onSuccess(data);
   }
 
   function handleFailure(data: FieldValues) {
-    console.error("Form failed!", data);
     onFail(data);
   }
 
@@ -53,7 +51,7 @@ export const Form: FC<FormProps> = ({
             <Input
               key={target}
               error={errors[name]}
-              label={label}
+              label={label + " " + target}
               name={name}
               type={type}
               register={register(name, {

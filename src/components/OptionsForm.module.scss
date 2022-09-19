@@ -28,30 +28,6 @@
   height: 1.5rem;
   border: unset;
   border-radius: unset;
-  &__red {
-    @extend .color;
-    background-color: red;
-  }
-  &__orange {
-    @extend .color;
-    background-color: orange;
-  }
-  &__yellow {
-    @extend .color;
-    background-color: yellow;
-  }
-  &__green {
-    @extend .color;
-    background-color: green;
-  }
-  &__blue {
-    @extend .color;
-    background-color: dodgerblue;
-  }
-  &__purple {
-    @extend .color;
-    background-color: purple;
-  }
 }
 
 .component {

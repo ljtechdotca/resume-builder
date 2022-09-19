@@ -3,6 +3,15 @@ interface Item {
   [key: string]: any;
 }
 
+interface DateItem extends Item {
+  startDate: string;
+  endDate: string;
+}
+
+interface ContentItem extends Item {
+  content: string;
+}
+
 // interface ExperienceItem extends Item {
 //   startDate: string;
 //   endDate: string;
@@ -45,9 +54,7 @@ interface ContactProps {
   zipCode: string | null;
   email: string | null;
   phone: string | null;
-  socials: {
-    [key: string]: string;
-  };
+  urls: Record<string, ContentItem>;
 }
 
 interface FormFields {
@@ -62,7 +69,8 @@ interface LayoutProps {
 
 interface StoreProps {
   layout: LayoutType;
-  zoomed: boolean;
+  isEditing: boolean;
+  isPreviewing: boolean;
   primaryColor: string | null;
   secondaryColor: string | null;
   firstName: string | null;
@@ -70,9 +78,9 @@ interface StoreProps {
   title: string | null;
   summary: string | null;
   contact: ContactProps;
-  education: Item[];
-  experiences: Item[];
-  skills: Item[];
+  education: Record<string, DateItem>;
+  experiences: Record<string, DateItem>;
+  skills: Record<string, Item>;
   other: {
     [key: string]: Item[];
   };

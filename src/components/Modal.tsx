@@ -15,7 +15,9 @@ export const Modal: FC<ModalProps> = ({ children, onZoomOut }) => {
 
   return (
     <div className={styles.root}>
-      <button onClick={onZoomOut}>X</button>
+      <button className="close" onClick={onZoomOut}>
+        X
+      </button>
       <div
         style={{
           height: `calc(${layoutSizes[layout]?.height ?? 0}rem * 5.75)`,

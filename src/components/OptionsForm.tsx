@@ -3,7 +3,7 @@ import { StoreContext } from "../App";
 import { layoutSizes } from "../lib/defaults";
 import styles from "./OptionsForm.module.scss";
 
-const colors = ["red", "orange", "yellow", "green", "blue", "purple"];
+const colors = ["#f44336", "#ff6600", "#05a05a", "#1e90ff", "#b568f4"];
 const layouts: Record<LayoutType, any> = {
   card: { name: "Business Card", components: ["SimpleCard"] },
   cv: { name: "CV Resume", components: ["SimpleColumn"] },
@@ -27,7 +27,10 @@ export const OptionsForm: FC = () => {
             {colors.map((color) => (
               <button
                 key={color}
-                className={styles[`color__${color}`]}
+                className={styles.color}
+                style={{
+                  backgroundColor: color,
+                }}
                 onClick={() => handlePathValue("primaryColor", color)}
               />
             ))}
@@ -40,7 +43,10 @@ export const OptionsForm: FC = () => {
           {colors.map((color) => (
             <button
               key={color}
-              className={styles[`color__${color}`]}
+              className={styles.color}
+              style={{
+                backgroundColor: color,
+              }}
               onClick={() => handlePathValue("secondaryColor", color)}
             />
           ))}

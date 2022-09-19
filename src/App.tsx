@@ -1,13 +1,14 @@
+import get from "lodash.get";
 import set from "lodash.set";
 import {
   createContext,
   Dispatch,
   SetStateAction,
+  useCallback,
   useEffect,
   useRef,
   useState,
 } from "react";
-import { FieldValues } from "react-hook-form";
 import { useReactToPrint } from "react-to-print";
 import styles from "./App.module.scss";
 import { SimpleCard } from "./components/cards/SimpleCard";
@@ -21,13 +22,14 @@ import {
   contactFields,
   dateRangeFields,
   skillsFields,
-  socialsFields,
+  urlFields,
   userFields,
 } from "./lib/defaults";
 
 const defaultResume: StoreProps = {
   layout: "cv",
-  zoomed: false,
+  isEditing: true,
+  isPreviewing: false,
   primaryColor: null,
   secondaryColor: null,
   contact: {
@@ -36,15 +38,15 @@ const defaultResume: StoreProps = {
     zipCode: null,
     email: null,
     phone: null,
-    socials: {},
+    urls: {},
   },
-  firstName: null,
-  lastName: null,
-  summary: null,
-  title: null,
-  education: [],
-  experiences: [],
-  skills: [],
+  firstName: userFields.defaultValues.firstName,
+  lastName: userFields.defaultValues.lastName,
+  summary: userFields.defaultValues.summary,
+  title: userFields.defaultValues.title,
+  education: {},
+  experiences: {},
+  skills: {},
   other: {},
 };
 
@@ -54,62 +56,52 @@ export const StoreContext = createContext<{
 }>({ store: defaultResume, setStore: () => {} });
 
 function App() {
+  const printRef = useRef<HTMLDivElement>(null);
   const [store, setStore] = useState<StoreProps>(defaultResume);
 
-  function handleChange(path: string, value: any) {
+  const handlePrint = useReactToPrint({ content: () => printRef.current });
+
+  function updateStore(path: string, value: any) {
     const newStore = { ...store };
     set(newStore, path, value);
     setStore(newStore);
   }
 
-  // @TODO : change this thing so its not so awful 😭
-  function handleArrayTargetSuccess(data: FieldValues, target: string) {
-    setStore((currentStore) => ({
-      ...currentStore,
-      [target]: [...(currentStore as any)[target], { ...data }],
-    }));
+  function injectStoreItem(path: string, item: Item) {
+    let newStoreItems = get(store, path);
+    newStoreItems = { ...newStoreItems, [item.title]: item };
+    updateStore(path, newStoreItems);
   }
 
-  function handleSocialsSuccess(data: FieldValues) {
-    setStore((currentStore) => ({
-      ...currentStore,
-      contact: {
-        ...currentStore.contact,
-        socials: { ...currentStore.contact.socials, [data.key]: data.value },
-      },
-    }));
+  function deleteStoreItem(...path: string[]) {
+    const newStoreItems = get(store, path[0]);
+    delete newStoreItems[path[1]];
+    updateStore(path[0], newStoreItems);
   }
 
-  function checkKeyDown(event: KeyboardEvent) {
-    if (event.ctrlKey && event.key === "p") {
-      event.preventDefault();
-      handlePrint();
-    }
-    if (event.key === "-") {
-      zoomOut();
-    }
-    if (event.key === "=") {
-      zoomIn();
-    }
-  }
+  const checkKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      console.log("checkKeyDown");
+      if (event.ctrlKey && event.key === "p") {
+        event.preventDefault();
+        console.log("Printing component...");
+        setStore((curr) => ({ ...curr, isEditing: false }));
+        handlePrint();
+      }
+    },
+    [handlePrint]
+  );
 
-  useEffect(() => {
+  // @TODO : 🐛 there is a problem reading the keydown more than once after using CTRL + P?
+  function initKeyboardEventListener() {
     document.addEventListener("keydown", checkKeyDown);
 
     return () => {
       document.removeEventListener("keydown", checkKeyDown);
     };
-  });
-
-  const printRef = useRef<HTMLDivElement>(null);
-  const handlePrint = useReactToPrint({ content: () => printRef.current });
-
-  function zoomIn() {
-    setStore((curr) => ({ ...curr, scale: 1 }));
   }
-  function zoomOut() {
-    setStore((curr) => ({ ...curr, scale: 0.5 }));
-  }
+
+  useEffect(initKeyboardEventListener, [checkKeyDown]);
 
   return (
     <StoreContext.Provider value={{ store, setStore }}>
@@ -121,59 +113,57 @@ function App() {
               <OptionsForm />
             </div>
             <div className={styles.item}>
-              <Form title="User" fields={userFields} onChange={handleChange} />
+              <Form title="User" fields={userFields} onChange={updateStore} />
             </div>
             <div className={styles.item}>
               <Form
                 title="Contact"
                 fields={contactFields}
-                onChange={handleChange}
+                onChange={updateStore}
               />
             </div>
             <div className={styles.item}>
               <Form
-                title="Socials"
-                fields={socialsFields}
-                onSuccess={handleSocialsSuccess}
+                title="Other Contact Information"
+                fields={urlFields}
+                onSuccess={(data) => injectStoreItem("contact.urls", data)}
               />
             </div>
             <div className={styles.item}>
               <Form
                 title="Skills"
                 fields={skillsFields}
-                onSuccess={(data) => handleArrayTargetSuccess(data, "skills")}
+                onSuccess={(data) => injectStoreItem("skills", data)}
               />
             </div>
             <div className={styles.item}>
               <Form
                 title="Work Experience"
                 fields={dateRangeFields}
-                onSuccess={(data) =>
-                  handleArrayTargetSuccess(data, "experiences")
-                }
+                onSuccess={(data) => injectStoreItem("experiences", data)}
               />
             </div>
             <div className={styles.item}>
               <Form
                 title="Education"
                 fields={dateRangeFields}
-                onSuccess={(data) =>
-                  handleArrayTargetSuccess(data, "education")
-                }
+                onSuccess={(data) => injectStoreItem("education", data)}
               />
             </div>
           </div>
-          <Preview
-            onZoomIn={() => handleChange("zoomed", true)}
-          >
+          <Preview onZoomIn={() => updateStore("isPreviewing", true)}>
             {store.layout === "card" && <SimpleCard ref={printRef} />}
-            {store.layout === "cv" && <SimpleColumn ref={printRef} />}
+            {store.layout === "cv" && (
+              <SimpleColumn ref={printRef} onDelete={deleteStoreItem} />
+            )}
           </Preview>
         </main>
-        {store.zoomed && (
-          <Modal onZoomOut={() => handleChange("zoomed", false)}>
+        {store.isPreviewing && (
+          <Modal onZoomOut={() => updateStore("isPreviewing", false)}>
             {store.layout === "card" && <SimpleCard />}
-            {store.layout === "cv" && <SimpleColumn />}
+            {store.layout === "cv" && (
+              <SimpleColumn onDelete={deleteStoreItem} />
+            )}
           </Modal>
         )}
       </div>

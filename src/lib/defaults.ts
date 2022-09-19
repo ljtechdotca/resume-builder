@@ -11,7 +11,7 @@ export const layoutSizes: Record<LayoutType, LayoutProps> = {
 
 export const userFields: FormFields = {
   defaultValues: {
-    firstName: "🎈🎈🎈🎈 HELLO WORLD 🎈🎈🎈🎈🎈",
+    firstName: "",
     lastName: "",
     title: "",
     summary: "",
@@ -23,7 +23,7 @@ export const userFields: FormFields = {
       type: "text",
       target: "firstName",
       minLength: 1,
-      maxLength: 32,
+      maxLength: 48,
     },
     {
       label: "Last Name",
@@ -31,7 +31,7 @@ export const userFields: FormFields = {
       type: "text",
       target: "lastName",
       minLength: 1,
-      maxLength: 32,
+      maxLength: 48,
     },
     {
       label: "Professional Title",
@@ -39,7 +39,7 @@ export const userFields: FormFields = {
       type: "text",
       target: "title",
       minLength: 4,
-      maxLength: 32,
+      maxLength: 48,
     },
     {
       label: "Summary",
@@ -52,27 +52,27 @@ export const userFields: FormFields = {
   ],
 };
 
-export const socialsFields: FormFields = {
+export const urlFields: FormFields = {
   defaultValues: {
-    key: "",
-    value: "",
+    title: "",
+    content: "",
   },
   inputs: [
     {
-      label: "Key Name",
-      name: "key",
+      label: "Title",
+      name: "title",
       type: "text",
-      target: "contact.socials",
+      target: "contact.urls.title",
       minLength: 2,
       maxLength: 16,
     },
     {
-      label: "Value",
-      name: "value",
+      label: "URL",
+      name: "content",
       type: "text",
-      target: "contact.socials",
+      target: "contact.urls.content",
       minLength: 2,
-      maxLength: 32,
+      maxLength: 48,
     },
   ],
 };
@@ -92,7 +92,7 @@ export const contactFields: FormFields = {
       type: "text",
       target: "contact.city",
       minLength: 1,
-      maxLength: 32,
+      maxLength: 48,
     },
     {
       label: "State / Province",
@@ -100,7 +100,7 @@ export const contactFields: FormFields = {
       type: "text",
       target: "contact.state",
       minLength: 1,
-      maxLength: 32,
+      maxLength: 48,
     },
     {
       label: "Zip Code / Postal Code",
@@ -116,7 +116,7 @@ export const contactFields: FormFields = {
       type: "text",
       target: "contact.phone",
       minLength: 4,
-      maxLength: 32,
+      maxLength: 48,
     },
     {
       label: "Email Address",
@@ -124,7 +124,7 @@ export const contactFields: FormFields = {
       type: "text",
       target: "contact.email",
       minLength: 4,
-      maxLength: 32,
+      maxLength: 48,
     },
   ],
 };
@@ -143,7 +143,7 @@ export const dateRangeFields: FormFields = {
       type: "text",
       target: "title",
       minLength: 4,
-      maxLength: 32,
+      maxLength: 48,
     },
     {
       label: "Position",
@@ -151,7 +151,7 @@ export const dateRangeFields: FormFields = {
       type: "text",
       target: "position",
       minLength: 4,
-      maxLength: 32,
+      maxLength: 48,
     },
     {
       label: "Location",
@@ -159,7 +159,7 @@ export const dateRangeFields: FormFields = {
       type: "text",
       target: "location",
       minLength: 4,
-      maxLength: 32,
+      maxLength: 48,
     },
     {
       label: "Start Date",
@@ -187,7 +187,7 @@ export const skillsFields: FormFields = {
       type: "text",
       target: "title",
       minLength: 4,
-      maxLength: 32,
+      maxLength: 48,
     },
   ],
 };
