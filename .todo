@@ -8,14 +8,20 @@ other:
 
         ☐ create a diaglog box for modal
 
+        ☐ create a global theme
+        
     forms:
 
-        ☐ reduce the weird functions
+        ✔ reduce the weird functions @done(22-09-20 15:19)
 
         ☐ improve overall user experience
             make it easier to fill the resume, use visual indications of missing required fields
 
+        ☐ add the form functions back
+            all the forms are held on Forms.tsx now, I didn't move functionality over yet (on App.tsx still)
+
         ☐ remove useless form buttons (on change)
+        
 
     other:
         ☐ create another cv component

@@ -193,10 +193,35 @@ export const skillsFields: FormFields = {
 };
 
 export const defaultForms = [
-  { title: "User", fields: userFields },
-  { title: "Contact", fields: contactFields },
-  { title: "Other Contact Information", fields: urlFields },
-  { title: "Skills", fields: skillsFields },
-  { title: "Work Experience", fields: dateRangeFields },
-  { title: "Education", fields: dateRangeFields },
+  { onSubmit: "onChange", target: "", title: "User", fields: userFields },
+  {
+    onSubmit: "onChange",
+    target: "contact",
+    title: "Contact",
+    fields: contactFields,
+  },
+  {
+    onSubmit: "onSuccess",
+    target: "contact.urls",
+    title: "Other Contact Information",
+    fields: urlFields,
+  },
+  {
+    onSubmit: "onSuccess",
+    target: "skills",
+    title: "Skills",
+    fields: skillsFields,
+  },
+  {
+    onSubmit: "onSuccess",
+    target: "experiences",
+    title: "Work Experience",
+    fields: dateRangeFields,
+  },
+  {
+    onSubmit: "onSuccess",
+    target: "education",
+    title: "Education",
+    fields: dateRangeFields,
+  },
 ];

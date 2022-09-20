@@ -1,8 +1,24 @@
+:root {
+  .light {
+    --color: black;
+    --backgroundColor-100: white;
+    --backgroundColor-200: #f8f8f8;
+    --borderColor: #e0e0e0;
+  }
+  .dark {
+    --color: white;
+    --backgroundColor-100: #424242;
+    --backgroundColor-200: #2c2c2c;
+    --borderColor: #686868;
+  }
+}
+
 body {
+  color: var(--color);
   scroll-snap-type: y mandatory;
   height: 100vh;
   overflow: hidden;
-  background-color: #fefefe;
+  background-color: var(--backgroundColor-200);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -27,18 +43,17 @@ form {
   display: grid;
   gap: 0.5rem;
   padding: 1rem;
-  background-color: white;
-  border: 1px solid #f8f8f8;
+  background-color: var(--backgroundColor-100);
+  border: 1px solid var(--borderColor);
   border-radius: 0.5rem;
-  box-shadow: 0 0 3px 0 #f8f8f8;
 }
 
 kbd {
-  border: 1px solid #f8f8f8;
+  border: 1px solid var(--borderColor);
   border-radius: 0.25rem;
   font-size: 12px;
   padding: 0 0.25rem;
-  box-shadow: 0 1px 0 0 #f8f8f8;
+  box-shadow: 0 1px 0 0 var(--borderColor);
 }
 
 button {
@@ -47,11 +62,12 @@ button {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  color: var(--color);
   border-radius: 4px;
-  background-color: white;
+  background-color: var(--backgroundColor-100);
   font-weight: 600;
   font-size: 12px;
-  border: 1px solid #f8f8f8;
+  border: 1px solid var(--borderColor);
   padding: 0.5rem 1rem;
 }
 
@@ -63,8 +79,8 @@ label {
 input,
 textarea {
   border-radius: 4px;
-  background-color: #fefefe;
-  border: 1px solid #f8f8f8;
+  background-color: var(--backgroundColor-200);
+  border: 1px solid var(--borderColor);
   width: 100%;
   padding: 0.5rem;
   &[type="color"] {
@@ -79,9 +95,9 @@ textarea {
   &::-webkit-color-swatch {
     overflow: hidden;
     border-radius: 0.25rem;
-    border: 1px solid #f8f8f8;
+    border: 1px solid var(--borderColor);
     &:hover {
-      outline: 2px solid black;
+      outline: 2px solid var(--color);
     }
   }
 }
@@ -97,7 +113,7 @@ ul {
 }
 
 hr {
-  border-top: 2px solid #f8f8f8;
+  border-top: 2px solid var(--borderColor);
   border-right: unset;
   border-bottom: unset;
   border-left: unset;
@@ -121,6 +137,6 @@ hr {
   width: 1.5rem;
   padding: 0.25rem;
   color: red;
-  border: 1px solid black;
+  border: 1px solid var(--color);
   position: absolute;
 }

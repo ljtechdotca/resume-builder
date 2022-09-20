@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import styles from "./App.module.scss";
 import { Forms } from "./components/Forms";
@@ -8,13 +8,40 @@ import { StoreProvider } from "./hooks/use-store";
 
 function App() {
   const printRef = useRef<HTMLDivElement>(null);
-  const usePrint = useReactToPrint({ content: () => printRef.current });
+  const handlePrint = useReactToPrint({
+    content: () => printRef.current,
+    removeAfterPrint: true,
+  });
+
+  const checkKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.ctrlKey && event.key === "p") {
+        event.preventDefault();
+        handlePrint();
+      }
+      if (event.ctrlKey && event.key === "k") {
+        event.preventDefault();
+        console.log("ctrl + k");
+        document.getElementById("theme")?.click();
+      }
+    },
+    [handlePrint]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", checkKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", checkKeyDown);
+    };
+  }, [checkKeyDown]);
 
   return (
     <StoreProvider>
-      <Header onPrint={usePrint} />
+      <Header onPrint={handlePrint} />
       <main className={styles.root}>
-        {/* <div className={styles.scroll}>
+        {/*
+        <div className={styles.scroll}>
           <div className={styles.item}>
             <OptionsForm />
           </div>
@@ -56,7 +83,8 @@ function App() {
               onSuccess={(data) => injectStoreItem("education", data)}
             />
           </div>
-        </div> */}
+        </div>
+        */}
         <Forms />
         <Preview ref={printRef} />
       </main>

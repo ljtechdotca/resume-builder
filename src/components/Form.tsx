@@ -1,16 +1,14 @@
 import { FC } from "react";
 import { FieldValues, useForm } from "react-hook-form";
+import { useStore } from "../hooks/use-store";
 import { Input } from "./Input";
 import { TextArea } from "./TextArea";
 
-function noop() {}
-
 export const Form: FC<FormProps> = ({
+  target,
   title,
   fields: { defaultValues, inputs },
-  onSuccess = noop,
-  onFail = noop,
-  onChange = noop,
+  onSubmit,
 }) => {
   const {
     register,
@@ -18,12 +16,17 @@ export const Form: FC<FormProps> = ({
     formState: { errors },
   } = useForm({ defaultValues, mode: "onChange" });
 
+  const { updateStore, injectStoreItem } = useStore();
+
   function handleSuccess(data: FieldValues) {
-    onSuccess(data);
+    console.log("handle success", onSubmit);
+    if (onSubmit === "onSuccess") {
+      injectStoreItem(target, data as Item);
+    }
   }
 
   function handleFailure(data: FieldValues) {
-    onFail(data);
+    console.error("Form Error: ", { target, title, data });
   }
 
   return (
@@ -42,7 +45,11 @@ export const Form: FC<FormProps> = ({
                 required: true,
                 minLength,
                 maxLength,
-                onChange: (event) => onChange(target, event.target.value),
+                onChange: (event) => {
+                  if (onSubmit === "onChange") {
+                    updateStore(target, event.target.value);
+                  }
+                },
               })}
             />
           );
@@ -58,7 +65,11 @@ export const Form: FC<FormProps> = ({
                 required: true,
                 minLength,
                 maxLength,
-                onChange: (event) => onChange(target, event.target.value),
+                onChange: (event) => {
+                  if (onSubmit === "onChange") {
+                    updateStore(target, event.target.value);
+                  }
+                },
               })}
             />
           );

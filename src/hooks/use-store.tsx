@@ -7,11 +7,13 @@ import {
   PropsWithChildren,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from "react";
 import { userFields } from "../lib/defaults";
 
 const initialStore: StoreProps = {
+  theme: "dark",
   layout: "resume",
   isEditing: true,
   isPreviewing: false,
@@ -61,11 +63,35 @@ export const useStore = () => {
     updateStore(path[0], newStoreItems);
   }
 
-  return { store, setStore, updateStore, injectStoreItem, deleteStoreItem };
+  function changeTheme(
+    oldTheme: StoreProps["theme"],
+    newTheme: StoreProps["theme"]
+  ) {
+    // const newTheme = store.theme === "dark" ? "light" : "dark";
+    console.log("changing theme", oldTheme, newTheme);
+    document.body.classList.remove(oldTheme);
+    document.body.classList.add(newTheme);
+    document.documentElement.style.colorScheme = newTheme;
+    updateStore("theme", newTheme);
+  }
+
+  return {
+    store,
+    setStore,
+    changeTheme,
+    updateStore,
+    injectStoreItem,
+    deleteStoreItem,
+  };
 };
 
 export const StoreProvider: FC<PropsWithChildren> = ({ children }) => {
   const [store, setStore] = useState<StoreProps>(initialStore);
+
+  useEffect(() => {
+    document.body.classList.add("dark");
+    document.documentElement.style.colorScheme = "dark";
+  }, []);
 
   return (
     <StoreContext.Provider value={{ store, setStore }}>

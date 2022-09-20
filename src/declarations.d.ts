@@ -12,31 +12,16 @@ interface ContentItem extends Item {
   content: string;
 }
 
-// interface ExperienceItem extends Item {
-//   startDate: string;
-//   endDate: string;
-//   position: string;
-//   location: string;
-//   accomplishments: string[];
-// }
-
-// interface EducationItem extends Item {
-//   startDate: string;
-//   endDate: string;
-//   location: string;
-// }
-
 type LayoutType = "card" | "resume";
 
 interface FormProps {
+  onSubmit: "onChange" | "onSuccess";
+  target: string;
   title: string;
   fields: {
     defaultValues: Record<string, any>;
     inputs: InputProps[];
   };
-  onSuccess?: (data: FieldValues) => void;
-  onFail?: (data: FieldValues) => void;
-  onChange?: (target: string, value: string) => void;
 }
 
 interface InputProps {
@@ -68,6 +53,7 @@ interface LayoutProps {
 }
 
 interface StoreProps {
+  theme: "dark" | "light";
   layout: LayoutType;
   isEditing: boolean;
   isPreviewing: boolean;

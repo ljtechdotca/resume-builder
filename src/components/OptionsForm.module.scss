@@ -2,10 +2,9 @@
   display: grid;
   gap: 0.5rem;
   padding: 1rem;
-  background-color: white;
-  border: 1px solid #f8f8f8;
+  background-color: var(--backgroundColor-100);
+  border: 1px solid var(--borderColor);
   border-radius: 0.5rem;
-  box-shadow: 0 0 3px 0 #f8f8f8;
 }
 
 .field {
@@ -15,9 +14,9 @@
 
 .colors {
   overflow: hidden;
-  background-color: #fefefe;
+  background-color: var(--backgroundColor-200);
   border-radius: 0.25rem;
-  border: 1px solid #f8f8f8;
+  border: 1px solid var(--borderColor);
   display: flex;
 }
 
@@ -36,7 +35,7 @@
   place-items: center center;
   img {
     object-fit: contain;
-    background-color: white;
-    border: 1px dashed #f8f8f8;
+    background-color: var(--backgroundColor-100);
+    border: 1px dashed var(--borderColor);
   }
 }
