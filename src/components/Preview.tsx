@@ -1,34 +1,27 @@
-import { FC, ReactNode, useContext } from "react";
-import { StoreContext } from "../App";
-import { layoutSizes } from "../lib/defaults";
+import { FC, ForwardedRef, forwardRef } from "react";
+import { useStore } from "../hooks/use-store";
+import { SimpleCard } from "./cards/SimpleCard";
 import styles from "./Preview.module.scss";
+import { SimpleResume } from "./resumes/SimpleResume";
 
 interface PreviewProps {
-  children: ReactNode;
-  onZoomIn: () => void;
+  ref: ForwardedRef<HTMLDivElement>;
 }
 
-export const Preview: FC<PreviewProps> = ({ children, onZoomIn }) => {
+export const Preview: FC<PreviewProps> = forwardRef((_, ref) => {
   const {
     store: { layout },
-  } = useContext(StoreContext);
+    deleteStoreItem,
+  } = useStore();
 
   return (
     <div className={styles.root}>
-      <header>
-        <button onClick={onZoomIn}>Zoom in</button>
-      </header>
-      <div className={styles.base}>
-        <div
-          className={styles.layout}
-          style={{
-            height: `calc(${layoutSizes[layout]?.height ?? 0}rem * 5.75)`,
-            width: `calc(${layoutSizes[layout]?.width ?? 0}rem * 5.75)`,
-          }}
-        >
-          {children}
-        </div>
+      <div className={styles[layout]}>
+        {layout === "card" && <SimpleCard ref={ref} />}
+        {layout === "resume" && (
+          <SimpleResume ref={ref} onDelete={deleteStoreItem} />
+        )}
       </div>
     </div>
   );
-};
+});

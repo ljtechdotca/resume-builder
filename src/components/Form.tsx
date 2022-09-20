@@ -51,7 +51,7 @@ export const Form: FC<FormProps> = ({
             <Input
               key={target}
               error={errors[name]}
-              label={label + " " + target}
+              label={label}
               name={name}
               type={type}
               register={register(name, {

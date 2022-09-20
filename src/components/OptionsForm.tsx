@@ -1,20 +1,16 @@
-import { FC, useContext } from "react";
-import { StoreContext } from "../App";
+import { FC } from "react";
+import { useStore } from "../hooks/use-store";
 import { layoutSizes } from "../lib/defaults";
 import styles from "./OptionsForm.module.scss";
 
 const colors = ["#f44336", "#ff6600", "#05a05a", "#1e90ff", "#b568f4"];
 const layouts: Record<LayoutType, any> = {
   card: { name: "Business Card", components: ["SimpleCard"] },
-  cv: { name: "CV Resume", components: ["SimpleColumn"] },
+  resume: { name: "CV Resume", components: ["SimpleResume"] },
 };
 
 export const OptionsForm: FC = () => {
-  const { store, setStore } = useContext(StoreContext);
-
-  function handlePathValue(path: string, value: any) {
-    setStore((currentStore) => ({ ...currentStore, [path]: value }));
-  }
+  const { store, updateStore } = useStore();
 
   return (
     <div className={styles.root}>
@@ -31,7 +27,7 @@ export const OptionsForm: FC = () => {
                 style={{
                   backgroundColor: color,
                 }}
-                onClick={() => handlePathValue("primaryColor", color)}
+                onClick={() => updateStore("primaryColor", color)}
               />
             ))}
           </div>
@@ -47,7 +43,7 @@ export const OptionsForm: FC = () => {
               style={{
                 backgroundColor: color,
               }}
-              onClick={() => handlePathValue("secondaryColor", color)}
+              onClick={() => updateStore("secondaryColor", color)}
             />
           ))}
         </div>
@@ -63,7 +59,7 @@ export const OptionsForm: FC = () => {
                   <button
                     key={type + component}
                     className={styles.component}
-                    onClick={() => handlePathValue("layout", type)}
+                    onClick={() => updateStore("layout", type)}
                   >
                     <img
                       src="/logo192.png"

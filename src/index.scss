@@ -7,35 +7,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-pre {
-  background-color: black;
-  color: white;
-  border-radius: 4px;
-  padding: 1rem;
-  word-break: break-word;
-  white-space: break-spaces;
-}
+// ::-webkit-scrollbar {
+//   width: 0.25rem;
+// }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
-}
+// ::-webkit-scrollbar-track {
+//   background: #f8f8f8;
+// }
 
-::-webkit-scrollbar {
-  width: 0.25rem;
-}
+// ::-webkit-scrollbar-thumb {
+//   background: #e0e0e0;
+// }
 
-::-webkit-scrollbar-track {
-  background: #f8f8f8;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #e0e0e0;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #cecece;
-}
+// ::-webkit-scrollbar-thumb:hover {
+//   background: #cecece;
+// }
 
 form {
   display: grid;

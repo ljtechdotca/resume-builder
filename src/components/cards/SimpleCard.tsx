@@ -1,5 +1,5 @@
-import { FC, ForwardedRef, forwardRef, useContext } from "react";
-import { StoreContext } from "../../App";
+import { FC, ForwardedRef, forwardRef } from "react";
+import { useStore } from "../../hooks/use-store";
 import { checkValue } from "../../lib/check-value";
 import styles from "./SimpleCard.module.scss";
 
@@ -7,21 +7,16 @@ interface CardProps {
   ref?: ForwardedRef<HTMLDivElement>;
 }
 
-export const SimpleCard: FC<CardProps> = forwardRef(({}, ref) => {
+export const SimpleCard: FC<CardProps> = forwardRef((_, ref) => {
   const {
     store: {
       primaryColor,
-      contact: { city, state, zipCode, email, phone, urls },
-      education,
-      experiences,
+      contact: { email, phone },
       firstName,
       lastName,
-      other,
-      skills,
-      summary,
       title,
     },
-  } = useContext(StoreContext);
+  } = useStore();
 
   return (
     <div className={styles.root} ref={ref}>

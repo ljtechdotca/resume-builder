@@ -8,15 +8,13 @@ interface HeaderProps {
 export const Header: FC<HeaderProps> = ({ onPrint }) => {
   return (
     <header className={styles.root}>
-      <div className={styles.base}>
-        <b>Resume Builder</b>
-        <button onClick={onPrint}>
-          Print
-          <div>
-            <kbd>CTRL</kbd> + <kbd>P</kbd>
-          </div>
-        </button>
-      </div>
+      <b>Resume Builder</b>
+      <button onClick={onPrint}>
+        Print
+        <div>
+          <kbd>CTRL</kbd> + <kbd>P</kbd>
+        </div>
+      </button>
     </header>
   );
 };

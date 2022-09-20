@@ -26,7 +26,7 @@ interface ContentItem extends Item {
 //   location: string;
 // }
 
-type LayoutType = "card" | "cv";
+type LayoutType = "card" | "resume";
 
 interface FormProps {
   title: string;

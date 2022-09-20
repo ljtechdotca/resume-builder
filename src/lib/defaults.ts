@@ -3,7 +3,7 @@ export const layoutSizes: Record<LayoutType, LayoutProps> = {
     height: 2,
     width: 3.5,
   },
-  cv: {
+  resume: {
     height: 11,
     width: 8.5,
   },
@@ -191,3 +191,12 @@ export const skillsFields: FormFields = {
     },
   ],
 };
+
+export const defaultForms = [
+  { title: "User", fields: userFields },
+  { title: "Contact", fields: contactFields },
+  { title: "Other Contact Information", fields: urlFields },
+  { title: "Skills", fields: skillsFields },
+  { title: "Work Experience", fields: dateRangeFields },
+  { title: "Education", fields: dateRangeFields },
+];
