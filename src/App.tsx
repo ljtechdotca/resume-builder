@@ -40,51 +40,6 @@ function App() {
     <StoreProvider>
       <Header onPrint={handlePrint} />
       <main className={styles.root}>
-        {/*
-        <div className={styles.scroll}>
-          <div className={styles.item}>
-            <OptionsForm />
-          </div>
-          <div className={styles.item}>
-            <Form title="User" fields={userFields} onChange={updateStore} />
-          </div>
-          <div className={styles.item}>
-            <Form
-              title="Contact"
-              fields={contactFields}
-              onChange={updateStore}
-            />
-          </div>
-          <div className={styles.item}>
-            <Form
-              title="Other Contact Information"
-              fields={urlFields}
-              onSuccess={(data) => injectStoreItem("contact.urls", data)}
-            />
-          </div>
-          <div className={styles.item}>
-            <Form
-              title="Skills"
-              fields={skillsFields}
-              onSuccess={(data) => injectStoreItem("skills", data)}
-            />
-          </div>
-          <div className={styles.item}>
-            <Form
-              title="Work Experience"
-              fields={dateRangeFields}
-              onSuccess={(data) => injectStoreItem("experiences", data)}
-            />
-          </div>
-          <div className={styles.item}>
-            <Form
-              title="Education"
-              fields={dateRangeFields}
-              onSuccess={(data) => injectStoreItem("education", data)}
-            />
-          </div>
-        </div>
-        */}
         <Forms />
         <Preview ref={printRef} />
       </main>

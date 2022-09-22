@@ -15,7 +15,7 @@ import { userFields } from "../lib/defaults";
 const initialStore: StoreProps = {
   theme: "dark",
   layout: "resume",
-  isEditing: true,
+  isEditing: null,
   isPreviewing: false,
   primaryColor: null,
   secondaryColor: null,
@@ -25,7 +25,13 @@ const initialStore: StoreProps = {
     zipCode: null,
     email: null,
     phone: null,
-    urls: {},
+    urls: {
+      Twitter: {
+        title: "Twitter",
+        content: "@ljtechdotca",
+        url: "@ljtechdotca",
+      },
+    },
   },
   firstName: userFields.defaultValues.firstName,
   lastName: userFields.defaultValues.lastName,
@@ -54,6 +60,7 @@ export const useStore = () => {
   function injectStoreItem(path: string, item: Item) {
     let newStoreItems = get(store, path);
     newStoreItems = { ...newStoreItems, [item.title]: item };
+    console.log({ newStoreItems });
     updateStore(path, newStoreItems);
   }
 

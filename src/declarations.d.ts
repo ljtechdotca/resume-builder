@@ -15,8 +15,7 @@ interface ContentItem extends Item {
 type LayoutType = "card" | "resume";
 
 interface FormProps {
-  onSubmit: "onChange" | "onSuccess";
-  target: string;
+  path: string;
   title: string;
   fields: {
     defaultValues: Record<string, any>;
@@ -52,10 +51,15 @@ interface LayoutProps {
   width: number;
 }
 
+interface IsEditingProps {
+  path: string;
+  values: Record<string, any>;
+}
+
 interface StoreProps {
   theme: "dark" | "light";
   layout: LayoutType;
-  isEditing: boolean;
+  isEditing: IsEditingProps | null;
   isPreviewing: boolean;
   primaryColor: string | null;
   secondaryColor: string | null;

@@ -1,14 +1,13 @@
 import { FC } from "react";
 import { FieldValues, useForm } from "react-hook-form";
-import { useStore } from "../hooks/use-store";
-import { Input } from "./Input";
-import { TextArea } from "./TextArea";
+import { useStore } from "../../hooks/use-store";
+import { Input } from "../Input";
+import { TextArea } from "../TextArea";
 
-export const Form: FC<FormProps> = ({
-  target,
+export const DefaultForm: FC<FormProps> = ({
+  path,
   title,
   fields: { defaultValues, inputs },
-  onSubmit,
 }) => {
   const {
     register,
@@ -16,22 +15,19 @@ export const Form: FC<FormProps> = ({
     formState: { errors },
   } = useForm({ defaultValues, mode: "onChange" });
 
-  const { updateStore, injectStoreItem } = useStore();
+  const { updateStore } = useStore();
 
   function handleSuccess(data: FieldValues) {
-    console.log("handle success", onSubmit);
-    if (onSubmit === "onSuccess") {
-      injectStoreItem(target, data as Item);
-    }
+    console.log("handle success");
   }
 
   function handleFailure(data: FieldValues) {
-    console.error("Form Error: ", { target, title, data });
+    console.error("Form Error: ", { path, title, data });
   }
 
   return (
     <form onSubmit={handleSubmit(handleSuccess, handleFailure)}>
-      <h2>{title} Form</h2>
+      <h2>{title} Default Form</h2>
       <hr />
       {inputs.map(({ label, name, target, type, minLength, maxLength }) => {
         if (type === "textarea") {
@@ -46,9 +42,7 @@ export const Form: FC<FormProps> = ({
                 minLength,
                 maxLength,
                 onChange: (event) => {
-                  if (onSubmit === "onChange") {
-                    updateStore(target, event.target.value);
-                  }
+                  updateStore(target, event.target.value);
                 },
               })}
             />
@@ -66,16 +60,13 @@ export const Form: FC<FormProps> = ({
                 minLength,
                 maxLength,
                 onChange: (event) => {
-                  if (onSubmit === "onChange") {
-                    updateStore(target, event.target.value);
-                  }
+                  updateStore(target, event.target.value);
                 },
               })}
             />
           );
         }
       })}
-      <button type="submit">Submit</button>
     </form>
   );
 };

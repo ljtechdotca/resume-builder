@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  gap: 0.25rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  button {
+    border: 1px solid white;
+    background-color: unset;
+    padding: 0;
+    cursor: pointer;
+    height: 1rem;
+    width: 1rem;
+    font-size: 10px;
+  }
+}

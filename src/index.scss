@@ -1,4 +1,14 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 :root {
+  --error: #e64040;
   .light {
     --color: black;
     --backgroundColor-100: white;
@@ -22,22 +32,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-// ::-webkit-scrollbar {
-//   width: 0.25rem;
-// }
-
-// ::-webkit-scrollbar-track {
-//   background: #f8f8f8;
-// }
-
-// ::-webkit-scrollbar-thumb {
-//   background: #e0e0e0;
-// }
-
-// ::-webkit-scrollbar-thumb:hover {
-//   background: #cecece;
-// }
 
 form {
   display: grid;
@@ -83,23 +77,23 @@ textarea {
   border: 1px solid var(--borderColor);
   width: 100%;
   padding: 0.5rem;
-  &[type="color"] {
-    -webkit-appearance: none;
-    border: unset;
-    height: 35px;
-    padding: unset;
-  }
-  &::-webkit-color-swatch-wrapper {
-    padding: 0;
-  }
-  &::-webkit-color-swatch {
-    overflow: hidden;
-    border-radius: 0.25rem;
-    border: 1px solid var(--borderColor);
-    &:hover {
-      outline: 2px solid var(--color);
-    }
-  }
+  // &[type="color"] {
+  //   -webkit-appearance: none;
+  //   border: unset;
+  //   height: 35px;
+  //   padding: unset;
+  // }
+  // &::-webkit-color-swatch-wrapper {
+  //   padding: 0;
+  // }
+  // &::-webkit-color-swatch {
+  //   overflow: hidden;
+  //   border-radius: 0.25rem;
+  //   border: 1px solid var(--borderColor);
+  //   &:hover {
+  //     outline: 2px solid var(--color);
+  //   }
+  // }
 }
 
 textarea {
@@ -119,24 +113,10 @@ hr {
   border-left: unset;
 }
 
-* {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+a {
+  text-decoration: unset;
 }
 
-.close {
-  margin: 0.5rem;
-  top: 0;
-  right: 0;
-  display: grid;
-  height: 1.5rem;
-  width: 1.5rem;
-  padding: 0.25rem;
-  color: red;
-  border: 1px solid var(--color);
-  position: absolute;
+.error {
+  color: var(--error);
 }

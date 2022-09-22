@@ -1,3 +1,3 @@
-export function checkValue(defaultValue: string, value: string | null) {
+export function checkValue(defaultValue: any, value: any) {
   return value ? value : defaultValue;
 }
