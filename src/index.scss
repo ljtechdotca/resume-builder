@@ -33,15 +33,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-form {
-  display: grid;
-  gap: 0.5rem;
-  padding: 1rem;
-  background-color: var(--backgroundColor-100);
-  border: 1px solid var(--borderColor);
-  border-radius: 0.5rem;
-}
-
 kbd {
   border: 1px solid var(--borderColor);
   border-radius: 0.25rem;
@@ -77,23 +68,6 @@ textarea {
   border: 1px solid var(--borderColor);
   width: 100%;
   padding: 0.5rem;
-  // &[type="color"] {
-  //   -webkit-appearance: none;
-  //   border: unset;
-  //   height: 35px;
-  //   padding: unset;
-  // }
-  // &::-webkit-color-swatch-wrapper {
-  //   padding: 0;
-  // }
-  // &::-webkit-color-swatch {
-  //   overflow: hidden;
-  //   border-radius: 0.25rem;
-  //   border: 1px solid var(--borderColor);
-  //   &:hover {
-  //     outline: 2px solid var(--color);
-  //   }
-  // }
 }
 
 textarea {
@@ -119,4 +93,10 @@ a {
 
 .error {
   color: var(--error);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }

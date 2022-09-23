@@ -1,0 +1,48 @@
+.root {
+  header {
+    height: 3rem;
+    display: flex;
+    padding: 0 2rem;
+    gap: 1rem;
+    align-items: center;
+    border-bottom: 1px solid var(--borderColor);
+  }
+}
+
+.base {
+  border-right: 1px solid var(--borderColor);
+  display: grid;
+  overflow-y: scroll;
+  direction: rtl;
+  height: calc(100vh - 6rem);
+  scroll-snap-type: y mandatory;
+  padding: 1rem;
+  scroll-padding: 1rem;
+  scroll-behavior: smooth;
+  form {
+    direction: ltr;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+  }
+}
+
+.anchor {
+  border: 1px solid var(--borderColor);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  font-size: 12px;
+  text-transform: capitalize;
+}
+
+.field {
+  overflow: hidden;
+  border: 1px solid var(--borderColor);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: calc(100vh - 8rem);
+  scroll-snap-align: start;
+}

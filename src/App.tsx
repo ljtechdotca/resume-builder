@@ -1,13 +1,14 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useReactToPrint } from "react-to-print";
 import styles from "./App.module.scss";
-import { Forms } from "./components/Forms";
+import { Form } from "./components/Form";
 import { Header } from "./components/Header";
 import { Preview } from "./components/Preview";
 import { StoreProvider } from "./hooks/use-store";
 
 function App() {
   const printRef = useRef<HTMLDivElement>(null);
+  const themeRef = useRef<HTMLButtonElement>(null);
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
     removeAfterPrint: true,
@@ -21,8 +22,7 @@ function App() {
       }
       if (event.ctrlKey && event.key === "k") {
         event.preventDefault();
-        console.log("ctrl + k");
-        document.getElementById("theme")?.click();
+        themeRef.current?.click();
       }
     },
     [handlePrint]
@@ -38,9 +38,9 @@ function App() {
 
   return (
     <StoreProvider>
-      <Header onPrint={handlePrint} />
+      <Header ref={themeRef} onPrint={handlePrint} />
       <main className={styles.root}>
-        <Forms />
+        <Form />
         <Preview ref={printRef} />
       </main>
     </StoreProvider>

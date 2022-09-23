@@ -1,5 +1,3 @@
-import get from "lodash.get";
-import set from "lodash.set";
 import {
   createContext,
   Dispatch,
@@ -10,37 +8,67 @@ import {
   useEffect,
   useState,
 } from "react";
-import { userFields } from "../lib/defaults";
 
 const initialStore: StoreProps = {
+  data: {
+    user: {
+      firstName: "Landon",
+      lastName: "Johnson",
+      title: "Sandwich Artisan",
+      email: "sandwich@artisan.com",
+      phone: "(123) 123-1234",
+    },
+    contact: {
+      city: "Toronto",
+      state: "Ontario",
+      zipCode: "123 ABC",
+    },
+    socials: [
+      {
+        name: "Twitter",
+        handle: "@ljtechdotca",
+      },
+      {
+        name: "GitHub",
+        handle: "@ljtechdotca",
+      },
+    ],
+    skills: [
+      {
+        name: "Twerking",
+      },
+    ],
+    about: {
+      summary: "Lorem ipsuim dolor set amet!",
+    },
+    workHistory: [
+      {
+        title: "Sandwich Artisan",
+        company: "Subway",
+        location: "Tilted Towers Fortnite",
+        description: "I built sandwich.",
+        startDate: "09/27/2022",
+        endDate: "09/27/2022",
+      },
+    ],
+    education: [
+      {
+        title: "Sandwich Artisan",
+        location: "Tilted Towers Fortnite",
+        description: "I learned about sandwich.",
+        startDate: "09/27/2022",
+        endDate: "09/27/2022",
+      },
+    ],
+    interests: [
+      {
+        name: "Twerking in Fortnite",
+      },
+    ],
+  },
   theme: "dark",
   layout: "resume",
-  isEditing: null,
-  isPreviewing: false,
-  primaryColor: null,
-  secondaryColor: null,
-  contact: {
-    city: null,
-    state: null,
-    zipCode: null,
-    email: null,
-    phone: null,
-    urls: {
-      Twitter: {
-        title: "Twitter",
-        content: "@ljtechdotca",
-        url: "@ljtechdotca",
-      },
-    },
-  },
-  firstName: userFields.defaultValues.firstName,
-  lastName: userFields.defaultValues.lastName,
-  summary: userFields.defaultValues.summary,
-  title: userFields.defaultValues.title,
-  education: {},
-  experiences: {},
-  skills: {},
-  other: {},
+  lastTouched: "",
 };
 
 export const StoreContext = createContext<{
@@ -51,44 +79,37 @@ export const StoreContext = createContext<{
 export const useStore = () => {
   const { store, setStore } = useContext(StoreContext);
 
-  function updateStore(path: string, value: any) {
-    const newStore = { ...store };
-    set(newStore, path, value);
-    setStore(newStore);
+  function recordTouch(lastTouched: any) {
+    setStore((currentStore) => ({
+      ...currentStore,
+      lastTouched,
+    }));
   }
 
-  function injectStoreItem(path: string, item: Item) {
-    let newStoreItems = get(store, path);
-    newStoreItems = { ...newStoreItems, [item.title]: item };
-    console.log({ newStoreItems });
-    updateStore(path, newStoreItems);
+  function updateData(data: Record<string, any>) {
+    setStore((currentStore) => ({
+      ...currentStore,
+      data: {
+        ...currentStore.data,
+        ...data,
+      },
+    }));
   }
 
-  function deleteStoreItem(...path: string[]) {
-    const newStoreItems = get(store, path[0]);
-    delete newStoreItems[path[1]];
-    updateStore(path[0], newStoreItems);
-  }
-
-  function changeTheme(
-    oldTheme: StoreProps["theme"],
-    newTheme: StoreProps["theme"]
-  ) {
-    // const newTheme = store.theme === "dark" ? "light" : "dark";
-    console.log("changing theme", oldTheme, newTheme);
-    document.body.classList.remove(oldTheme);
+  function changeTheme() {
+    const newTheme = store.theme === "dark" ? "light" : "dark";
+    document.body.classList.remove(store.theme);
     document.body.classList.add(newTheme);
     document.documentElement.style.colorScheme = newTheme;
-    updateStore("theme", newTheme);
+    setStore((currentStore) => ({ ...currentStore, theme: newTheme }));
   }
 
   return {
     store,
     setStore,
     changeTheme,
-    updateStore,
-    injectStoreItem,
-    deleteStoreItem,
+    recordTouch,
+    updateData,
   };
 };
 

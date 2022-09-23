@@ -1,27 +1,20 @@
-import { FC } from "react";
+import { FC, ForwardedRef, forwardRef } from "react";
 import { useStore } from "../hooks/use-store";
 import styles from "./Header.module.scss";
 
 interface HeaderProps {
   onPrint: () => void;
+  ref: ForwardedRef<HTMLButtonElement>;
 }
 
-export const Header: FC<HeaderProps> = ({ onPrint }) => {
-  const {
-    store: { theme },
-    changeTheme,
-  } = useStore();
+export const Header: FC<HeaderProps> = forwardRef(({ onPrint }, ref) => {
+  const { changeTheme } = useStore();
 
   return (
     <header className={styles.root}>
       <b>ljdocument</b>
       <div className={styles.base}>
-        <button
-          id="theme"
-          onClick={() =>
-            changeTheme(theme, theme === "dark" ? "light" : "dark")
-          }
-        >
+        <button ref={ref} id="theme" onClick={changeTheme}>
           ☀ Theme
           <div>
             <kbd>CTRL</kbd> + <kbd>K</kbd>
@@ -36,4 +29,4 @@ export const Header: FC<HeaderProps> = ({ onPrint }) => {
       </div>
     </header>
   );
-};
+});
