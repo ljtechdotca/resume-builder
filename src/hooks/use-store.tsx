@@ -69,6 +69,7 @@ const initialStore: StoreProps = {
   theme: "dark",
   layout: "resume",
   lastTouched: "",
+  isPreviewing: false,
 };
 
 export const StoreContext = createContext<{

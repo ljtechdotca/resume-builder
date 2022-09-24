@@ -10,12 +10,14 @@
 :root {
   --error: #e64040;
   .light {
+    --secondaryColor: #2e2e2e;
     --color: black;
     --backgroundColor-100: white;
     --backgroundColor-200: #f8f8f8;
     --borderColor: #e0e0e0;
   }
   .dark {
+    --secondaryColor: #909090;
     --color: white;
     --backgroundColor-100: #424242;
     --backgroundColor-200: #2c2c2c;
@@ -57,17 +59,24 @@ button {
 }
 
 label {
+  color: var(--secondaryColor);
   font-size: 12px;
   font-weight: 600;
+  border-radius: 0.25rem;
+  background-color: var(--backgroundColor-100);
+  border: 1px solid transparent;
+  padding: 0.5rem;
 }
 
 input,
 textarea {
-  border-radius: 4px;
-  background-color: var(--backgroundColor-200);
-  border: 1px solid var(--borderColor);
+  outline: unset;
+  border: unset;
+  background-color: unset;
   width: 100%;
-  padding: 0.5rem;
+  &::placeholder {
+    color: var(--borderColor);
+  }
 }
 
 textarea {
@@ -81,7 +90,7 @@ ul {
 }
 
 hr {
-  border-top: 2px solid var(--borderColor);
+  border-top: 1px solid currentColor;
   border-right: unset;
   border-bottom: unset;
   border-left: unset;

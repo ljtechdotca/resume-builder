@@ -14,9 +14,6 @@ export const Preview: FC<PreviewProps> = forwardRef((_, ref) => {
     <div className={styles.root}>
       <div className={styles[store.layout]}>
         <DefaultResume ref={ref} />
-        <pre>
-          <code>{JSON.stringify(store, null, 4)}</code>
-        </pre>
       </div>
     </div>
   );

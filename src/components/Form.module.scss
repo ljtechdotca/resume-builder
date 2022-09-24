@@ -34,15 +34,3 @@
   font-size: 12px;
   text-transform: capitalize;
 }
-
-.field {
-  overflow: hidden;
-  border: 1px solid var(--borderColor);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  height: calc(100vh - 8rem);
-  scroll-snap-align: start;
-}

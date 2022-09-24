@@ -1,9 +1,12 @@
 import { FC, ForwardedRef, forwardRef } from "react";
 import { useStore } from "../../hooks/use-store";
-import { ReactComponent as CalendarIcon } from "../icons/calendar.svg";
-import { ReactComponent as EmailIcon } from "../icons/email.svg";
-import { ReactComponent as LocationIcon } from "../icons/location.svg";
-import { ReactComponent as PhoneIcon } from "../icons/phone.svg";
+import {
+  CalendarIcon,
+  EmailIcon,
+  LocationIcon,
+  PhoneIcon,
+} from "../icons/index";
+
 import styles from "./DefaultResume.module.scss";
 
 interface DefaultResumeProps {
@@ -85,10 +88,6 @@ export const DefaultResume: FC<DefaultResumeProps> = forwardRef((_, ref) => {
           <hr />
           <h2>Work History</h2>
           <hr />
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Perspiciatis, quidem!
-          </p>
           <div>
             {data.workHistory.map((item: any) => (
               <div key={item.title} className={styles.base__item}>
