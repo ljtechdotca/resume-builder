@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import { FC, ForwardedRef, forwardRef } from "react";
 import { useStore } from "../../hooks/use-store";
 import {
@@ -60,7 +61,7 @@ export const DefaultResume: FC<DefaultResumeProps> = forwardRef((_, ref) => {
               {checkValue(data.contact.zipCode)}
             </div>
             {data.socials.map((social: any) => (
-              <div key={social.name}>
+              <div key={nanoid()}>
                 <h4>{social.name}</h4>
                 <div>{social.handle}</div>
               </div>
@@ -73,7 +74,7 @@ export const DefaultResume: FC<DefaultResumeProps> = forwardRef((_, ref) => {
           </div>
           <div className={styles.base__bottom}>
             {data.skills.map((skill: any) => (
-              <div key={skill.name}>
+              <div key={nanoid()}>
                 <h4>{skill.name}</h4>
               </div>
             ))}
@@ -90,7 +91,7 @@ export const DefaultResume: FC<DefaultResumeProps> = forwardRef((_, ref) => {
           <hr />
           <div>
             {data.workHistory.map((item: any) => (
-              <div key={item.title} className={styles.base__item}>
+              <div className={styles.base__item} key={nanoid()}>
                 <h3>{item.title}</h3>
                 <h4>{item.company}</h4>
                 <p>
@@ -108,7 +109,7 @@ export const DefaultResume: FC<DefaultResumeProps> = forwardRef((_, ref) => {
           <h2>Education</h2>
           <hr />
           {data.education.map((item: any) => (
-            <div key={item.title} className={styles.base__item}>
+            <div className={styles.base__item} key={nanoid()}>
               <h3>{item.title}</h3>
               <p>
                 <CalendarIcon width={16} height={16} /> {item.startDate} -{" "}
@@ -124,7 +125,7 @@ export const DefaultResume: FC<DefaultResumeProps> = forwardRef((_, ref) => {
           <h2>Interests</h2>
           <hr />
           {data.interests.map((item: any) => (
-            <div key={item.title} className={styles.base__item}>
+            <div className={styles.base__item} key={nanoid()}>
               <h3>{item.name}</h3>
             </div>
           ))}

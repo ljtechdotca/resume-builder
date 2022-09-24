@@ -8,7 +8,8 @@
 }
 
 :root {
-  --error: #e64040;
+  --red: #e64040;
+  --purple: #a16ceb;
   .light {
     --secondaryColor: #2e2e2e;
     --color: black;
@@ -63,17 +64,17 @@ label {
   font-size: 12px;
   font-weight: 600;
   border-radius: 0.25rem;
-  background-color: var(--backgroundColor-100);
-  border: 1px solid transparent;
+  border: 1px dashed var(--borderColor);
   padding: 0.5rem;
 }
 
 input,
 textarea {
-  outline: unset;
+  outline-color: var(--borderColor);
   border: unset;
   background-color: unset;
   width: 100%;
+  font-size: 1.25rem;
   &::placeholder {
     color: var(--borderColor);
   }
