@@ -8,7 +8,7 @@ export const NestedTextArea: FC<InputProps> = ({
   name,
   placeholder,
 }) => {
-  const { recordTouch, updateData } = useStore();
+  const { updateData } = useStore();
   const { getValues, register } = useFormContext();
 
   return (
@@ -19,7 +19,6 @@ export const NestedTextArea: FC<InputProps> = ({
         placeholder={placeholder}
         {...register(name, {
           onChange: (event) => {
-            recordTouch(name);
             updateData(getValues());
           },
         })}

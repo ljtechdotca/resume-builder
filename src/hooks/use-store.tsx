@@ -86,8 +86,6 @@ const initialStore: StoreProps = {
   },
   theme: "dark",
   layout: "card",
-  lastTouched: "",
-  isPreviewing: false,
 };
 
 export const StoreContext = createContext<{
@@ -97,13 +95,6 @@ export const StoreContext = createContext<{
 
 export const useStore = () => {
   const { store, setStore } = useContext(StoreContext);
-
-  function recordTouch(lastTouched: any) {
-    setStore((currentStore) => ({
-      ...currentStore,
-      lastTouched,
-    }));
-  }
 
   function updateData(data: Record<string, any>) {
     setStore((currentStore) => ({
@@ -127,7 +118,6 @@ export const useStore = () => {
     store,
     setStore,
     changeTheme,
-    recordTouch,
     updateData,
   };
 };

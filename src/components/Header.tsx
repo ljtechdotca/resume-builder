@@ -8,20 +8,12 @@ interface HeaderProps {
 }
 
 export const Header: FC<HeaderProps> = forwardRef(({ onPrint }, ref) => {
-  const { setStore, changeTheme } = useStore();
-
-  function togglePreview() {
-    setStore((currentStore) => ({
-      ...currentStore,
-      isPreviewing: !currentStore.isPreviewing,
-    }));
-  }
+  const { changeTheme } = useStore();
 
   return (
     <header className={styles.root}>
       <b>ljdocument</b>
       <div className={styles.base}>
-        <button onClick={togglePreview}>Preview</button>
         <button ref={ref} id="theme" onClick={changeTheme}>
           ☀ Theme
           <div>

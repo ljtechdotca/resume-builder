@@ -1,18 +1,9 @@
-
-@today
-    ☐ anything to do with the droppables, draggables, and field/fields is probably yucky and can be improved somewhere
-        ✔ Draggable @done(22-09-26 17:01)
-        ✔ Droppable @done(22-09-26 17:02)
-        ✔ Field @done(22-09-26 18:45)
-            ✔ make a component for the "deactivated" field @done(22-09-26 18:44)
-            FieldInfo
-                maybe change the UI when I get an idea what I'd like it to look like
-
 other:
     ☐ create another cv component
-    ☐ refactor the business card
+    ✔ refactor the business card @done(22-09-26 19:16)
         print more than one card on a page
         front and back layouts/ sides / versions
     ☐ color input
     ☐ input for uploading an image to the previewed layout
         used for the alternate cv and maybe for business card logos
+    ☐ swap between layout types
