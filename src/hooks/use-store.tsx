@@ -12,77 +12,25 @@ import {
 const initialStore: StoreProps = {
   data: {
     user: {
-      firstName: "Landon",
-      lastName: "Johnson",
-      title: "Sandwich Artisan",
-      email: "sandwich@artisan.com",
-      phone: "(123) 123-1234",
+      firstName: "",
+      lastName: "",
+      title: "",
+      email: "",
+      phone: "",
     },
     contact: {
-      city: "Toronto",
-      state: "Ontario",
-      zipCode: "123 ABC",
+      city: "",
+      state: "",
+      zipCode: "",
     },
-    socials: [
-      {
-        name: "Twitter",
-        handle: "@ljtechdotca",
-      },
-      {
-        name: "GitHub",
-        handle: "@ljtechdotca",
-      },
-    ],
-    skills: [
-      {
-        name: "Twerking",
-      },
-      {
-        name: "A",
-      },
-      {
-        name: "B",
-      },
-      {
-        name: "C",
-      },
-      {
-        name: "D",
-      },
-    ],
+    socials: [],
+    skills: [],
     about: {
-      summary: "Lorem ipsuim dolor set amet!",
+      summary: "",
     },
-    workHistory: [
-      {
-        title: "Sandwich Artisan",
-        company: "Subway",
-        location: "Tilted Towers Fortnite",
-        description: "I built sandwich.",
-        startDate: "09/27/2022",
-        endDate: "09/27/2022",
-      },
-    ],
-    education: [
-      {
-        title: "Sandwich Artisan",
-        location: "Tilted Towers Fortnite",
-        description: "I learned about sandwich.",
-        startDate: "09/27/2022",
-        endDate: "09/27/2022",
-      },
-    ],
-    interests: [
-      {
-        name: "Twerking in Fortnite",
-      },
-      {
-        name: "Doing Stuff",
-      },
-      {
-        name: "League of Legends",
-      },
-    ],
+    workHistory: [],
+    education: [],
+    interests: [],
   },
   theme: "dark",
   layout: "card",

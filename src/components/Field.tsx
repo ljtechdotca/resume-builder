@@ -20,7 +20,6 @@ interface FieldProps {
 
 export const Field: FC<FieldProps> = ({ name, options }) => {
   const [active, setActive] = useState(false);
-  const { store } = useStore();
 
   if (options) {
     const { field, index, onRemove } = options as FieldOptions;
