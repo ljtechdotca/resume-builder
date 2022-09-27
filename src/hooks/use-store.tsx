@@ -37,6 +37,18 @@ const initialStore: StoreProps = {
       {
         name: "Twerking",
       },
+      {
+        name: "A",
+      },
+      {
+        name: "B",
+      },
+      {
+        name: "C",
+      },
+      {
+        name: "D",
+      },
     ],
     about: {
       summary: "Lorem ipsuim dolor set amet!",
@@ -64,10 +76,16 @@ const initialStore: StoreProps = {
       {
         name: "Twerking in Fortnite",
       },
+      {
+        name: "Doing Stuff",
+      },
+      {
+        name: "League of Legends",
+      },
     ],
   },
   theme: "dark",
-  layout: "resume",
+  layout: "card",
   lastTouched: "",
   isPreviewing: false,
 };

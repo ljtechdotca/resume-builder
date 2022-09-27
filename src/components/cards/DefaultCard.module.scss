@@ -1,0 +1,27 @@
+.root {
+  background-color: white;
+  color: black;
+  width: calc(3.5rem * 6);
+  height: calc(2rem * 6);
+  padding: 1rem;
+  position: relative;
+  outline: 1px solid #e0e0e0;
+  word-break: break-word;
+  white-space: break-spaces;
+  img {
+    width: 48px;
+    height: 48px;
+    border-radius: 9999px;
+  }
+  h2 {
+    line-height: 0.95;
+  }
+}
+
+.base {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.25rem;
+  font-weight: 700;
+}

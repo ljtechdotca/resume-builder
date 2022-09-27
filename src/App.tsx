@@ -1,6 +1,14 @@
-import { useCallback, useEffect, useRef } from "react";
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useReactToPrint } from "react-to-print";
 import styles from "./App.module.scss";
+import { Draggable } from "./components/Draggable";
+import { Droppable } from "./components/Droppable";
 import { Form } from "./components/Form";
 import { Header } from "./components/Header";
 import { Preview } from "./components/Preview";

@@ -1,0 +1,13 @@
+.root {
+  border: 1px dashed var(--borderColor);
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  color: var(--secondaryColor);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.base {
+  // border: 1px solid red;
+}

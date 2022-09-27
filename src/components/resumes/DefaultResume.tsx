@@ -1,13 +1,13 @@
 import { nanoid } from "nanoid";
 import { FC, ForwardedRef, forwardRef } from "react";
 import { useStore } from "../../hooks/use-store";
+import { checkValue } from "../../lib/checkValue";
 import {
   CalendarIcon,
   EmailIcon,
   LocationIcon,
   PhoneIcon,
 } from "../icons/index";
-
 import styles from "./DefaultResume.module.scss";
 
 interface DefaultResumeProps {
@@ -18,10 +18,6 @@ export const DefaultResume: FC<DefaultResumeProps> = forwardRef((_, ref) => {
   const {
     store: { data },
   } = useStore();
-
-  function checkValue(value: any) {
-    return value ? value : "None";
-  }
 
   return (
     <div className={styles.root} ref={ref}>

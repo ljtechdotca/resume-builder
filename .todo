@@ -1,13 +1,18 @@
-other:     
-    form inputs:
-        ☐ startDate vs. endDate, startEnd cannot be greater than endDate, endDate cannot be less than startDate
-    ui:
-        ☐ responsive design
-            cant view the website on anything smaller than a desktop
-    forms:
-        ☐ 🐛 @IMPORTANT : fix the unique key issue on the previewed layout
-            fields will have changing keys based on their values, fix this with static keys
-        ☐ improve overall user experience
-            make it easier to fill the resume, use visual indications of missing required fields
-    other:
-        ☐ create another cv component
+
+@today
+    ☐ anything to do with the droppables, draggables, and field/fields is probably yucky and can be improved somewhere
+        ✔ Draggable @done(22-09-26 17:01)
+        ✔ Droppable @done(22-09-26 17:02)
+        ✔ Field @done(22-09-26 18:45)
+            ✔ make a component for the "deactivated" field @done(22-09-26 18:44)
+            FieldInfo
+                maybe change the UI when I get an idea what I'd like it to look like
+
+other:
+    ☐ create another cv component
+    ☐ refactor the business card
+        print more than one card on a page
+        front and back layouts/ sides / versions
+    ☐ color input
+    ☐ input for uploading an image to the previewed layout
+        used for the alternate cv and maybe for business card logos

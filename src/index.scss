@@ -10,6 +10,7 @@
 :root {
   --red: #e64040;
   --purple: #a16ceb;
+  --blue: #3489ff;
   .light {
     --secondaryColor: #2e2e2e;
     --color: black;
@@ -53,7 +54,7 @@ button {
   color: var(--color);
   border-radius: 4px;
   background-color: var(--backgroundColor-100);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 12px;
   border: 1px solid var(--borderColor);
   padding: 0.5rem 1rem;
@@ -62,19 +63,23 @@ button {
 label {
   color: var(--secondaryColor);
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 0.25rem;
-  border: 1px dashed var(--borderColor);
+  border: 1px solid var(--borderColor);
   padding: 0.5rem;
 }
 
 input,
 textarea {
-  outline-color: var(--borderColor);
-  border: unset;
+  border: 1px solid transparent;
   background-color: unset;
   width: 100%;
+  font-weight: 400;
   font-size: 1.25rem;
+  outline: unset;
+  &:focus {
+    border-bottom: 1px solid var(--blue);
+  }
   &::placeholder {
     color: var(--borderColor);
   }

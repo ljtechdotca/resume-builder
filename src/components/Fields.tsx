@@ -1,100 +1,86 @@
+import { DndContext, DragEndEvent } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import { FC } from "react";
 import { useFieldArray, useFormContext } from "react-hook-form";
 import { useStore } from "../hooks/use-store";
 import { fieldsData } from "../lib/defaults";
+import { Draggable } from "./Draggable";
+import { Droppable } from "./Droppable";
+import { Field } from "./Field";
 import styles from "./Fields.module.scss";
-import { ArrowDownIcon, ArrowUpIcon, DeleteIcon } from "./icons/index";
-import { NestedInput } from "./NestedInput";
-import { NestedTextArea } from "./NestedTextArea";
+import { AddIcon } from "./icons/index";
 
 interface FieldsProps {
   name: FieldsType;
+  onScrollSnap: (type: string) => void;
 }
 
-export const Fields: FC<FieldsProps> = ({ name }) => {
+export const Fields: FC<FieldsProps> = ({ name, onScrollSnap }) => {
   const { updateData } = useStore();
   const { control, getValues } = useFormContext();
-  const { fields, remove, append, swap } = useFieldArray({
+  const { fields, append, remove, swap, move } = useFieldArray({
     control,
     name,
   });
 
+  function handleDragStart() {
+    onScrollSnap("none");
+  }
+
+  function handleDragEnd(event: DragEndEvent) {
+    const { active, over } = event;
+    if (over && active.id !== over.id) {
+      const oldIndex = fields.findIndex((e) => e.id === (active.id as string));
+      const newIndex = fields.findIndex((e) => e.id === (over.id as string));
+      move(oldIndex, newIndex);
+      updateData(getValues());
+      onScrollSnap("y mandatory");
+    }
+  }
+
   return (
     <div id={name} className={styles.root}>
-      <h2>{name} form</h2>
+      <h2>{fieldsData[name].title}</h2>
       <hr />
-      <button
-        type="button"
-        className={styles.add}
-        onClick={() => {
-          append(fieldsData[name].defaultValues);
-          updateData(getValues());
-        }}
-      >
-        Add
-      </button>
-      <div className={styles.fields}>
-        {fields.map((field, index) => {
-          return (
-            <div key={field.id}>
-              <div className={styles.base}>
-                <div className={styles.inputs}>
-                  {fieldsData[name].inputs.map((input: InputProps) => {
-                    if (input.type === "textarea") {
-                      return (
-                        <NestedTextArea
-                          key={`${name}-${input.name}-${field.id}-textarea`}
-                          label={input.label}
-                          name={`${name}.${index}.${input.name}`}
-                          placeholder={input.placeholder}
-                        />
-                      );
-                    } else {
-                      return (
-                        <NestedInput
-                          key={`${name}-${input.name}-${field.id}-input`}
-                          type={input.type}
-                          label={input.label}
-                          name={`${name}.${index}.${input.name}`}
-                          placeholder={input.placeholder}
-                        />
-                      );
-                    }
-                  })}
-                </div>
-                <div className={styles.menu}>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      swap(index, index - 1);
-                      updateData(getValues());
-                    }}
-                  >
-                    <ArrowUpIcon width={16} height={16} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      remove(index);
-                      updateData(getValues());
-                    }}
-                  >
-                    <DeleteIcon width={16} height={16} />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      swap(index, index + 1);
-                      updateData(getValues());
-                    }}
-                  >
-                    <ArrowDownIcon width={16} height={16} />
-                  </button>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+      <div className={styles.base}>
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+          <SortableContext
+            items={fields.map(({ id }) => id)}
+            strategy={verticalListSortingStrategy}
+          >
+            <Droppable id={`${name}-droppable`}>
+              {fields.map((field, index) => {
+                return (
+                  <Draggable key={field.id} id={field.id}>
+                    <Field
+                      name={name}
+                      options={{
+                        field,
+                        index,
+                        onRemove: () => {
+                          remove(index);
+                          updateData(getValues());
+                        },
+                      }}
+                    />
+                  </Draggable>
+                );
+              })}
+            </Droppable>
+          </SortableContext>
+        </DndContext>
+        <button
+          type="button"
+          onClick={() => {
+            append(fieldsData[name].defaultValues);
+            updateData(getValues());
+          }}
+        >
+          <AddIcon width={16} height={16} /> Add {fieldsData[name].title}
+        </button>
       </div>
     </div>
   );

@@ -1,10 +1,12 @@
 interface FieldsDataProps {
+  title: string;
   inputs: InputProps[];
   defaultValues?: Record<string, any>;
 }
 
 export const fieldsData: Record<FieldsType, FieldsDataProps> = {
   user: {
+    title: "Basic Information",
     inputs: [
       {
         type: "text",
@@ -39,6 +41,7 @@ export const fieldsData: Record<FieldsType, FieldsDataProps> = {
     ],
   },
   contact: {
+    title: "Contact Information",
     inputs: [
       {
         type: "text",
@@ -61,6 +64,7 @@ export const fieldsData: Record<FieldsType, FieldsDataProps> = {
     ],
   },
   socials: {
+    title: "Social Profiles",
     defaultValues: { name: "", handle: "" },
     inputs: [
       {
@@ -78,6 +82,7 @@ export const fieldsData: Record<FieldsType, FieldsDataProps> = {
     ],
   },
   skills: {
+    title: "Your Skills",
     defaultValues: { name: "" },
     inputs: [
       {
@@ -89,6 +94,7 @@ export const fieldsData: Record<FieldsType, FieldsDataProps> = {
     ],
   },
   about: {
+    title: "About",
     inputs: [
       {
         type: "textarea",
@@ -98,49 +104,8 @@ export const fieldsData: Record<FieldsType, FieldsDataProps> = {
       },
     ],
   },
-  education: {
-    defaultValues: {
-      title: "",
-      location: "",
-      description: "",
-      startDate: "",
-      endDate: "",
-    },
-    inputs: [
-      {
-        type: "text",
-        label: "Title",
-        name: "title",
-        placeholder: "Toronto University",
-      },
-      {
-        type: "text",
-        label: "Location",
-        name: "location",
-        placeholder: "Ontario, CA",
-      },
-      {
-        type: "date",
-        label: "Start Date",
-        name: "startDate",
-        placeholder: "9/23/2022",
-      },
-      {
-        type: "date",
-        label: "End Date",
-        name: "endDate",
-        placeholder: "9/23/2022",
-      },
-      {
-        type: "text",
-        label: "Description",
-        name: "description",
-        placeholder:
-          "Thesis title: Low-cost mana generation in under-resourced environments.",
-      },
-    ],
-  },
   workHistory: {
+    title: "Work History",
     defaultValues: {
       title: "",
       location: "",
@@ -168,13 +133,13 @@ export const fieldsData: Record<FieldsType, FieldsDataProps> = {
         placeholder: "Ontario, CA",
       },
       {
-        type: "date",
+        type: "startDate",
         label: "Start Date",
         name: "startDate",
         placeholder: "9/23/2022",
       },
       {
-        type: "date",
+        type: "endDate",
         label: "End Date",
         name: "endDate",
         placeholder: "9/23/2022",
@@ -187,7 +152,51 @@ export const fieldsData: Record<FieldsType, FieldsDataProps> = {
       },
     ],
   },
+  education: {
+    title: "Education",
+    defaultValues: {
+      title: "",
+      location: "",
+      description: "",
+      startDate: "",
+      endDate: "",
+    },
+    inputs: [
+      {
+        type: "text",
+        label: "Title",
+        name: "title",
+        placeholder: "Toronto University",
+      },
+      {
+        type: "text",
+        label: "Location",
+        name: "location",
+        placeholder: "Ontario, CA",
+      },
+      {
+        type: "startDate",
+        label: "Start Date",
+        name: "startDate",
+        placeholder: "9/23/2022",
+      },
+      {
+        type: "endDate",
+        label: "End Date",
+        name: "endDate",
+        placeholder: "9/23/2022",
+      },
+      {
+        type: "text",
+        label: "Description",
+        name: "description",
+        placeholder:
+          "Thesis title: Low-cost mana generation in under-resourced environments.",
+      },
+    ],
+  },
   interests: {
+    title: "Your Interests",
     defaultValues: { name: "" },
     inputs: [
       {

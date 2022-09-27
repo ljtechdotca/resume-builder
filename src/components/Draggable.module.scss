@@ -1,0 +1,14 @@
+.root {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  place-items: start stretch;
+  gap: 0.5rem;
+}
+
+.handle {
+  background-color: unset;
+  border: 1px dashed var(--borderColor);
+  &:hover {
+    border: 1px solid var(--blue);
+  }
+}
