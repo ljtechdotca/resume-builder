@@ -1,9 +1,10 @@
+important:
+    ☐ input for uploading an image to the previewed layout
+    ☐ color input
+    ✔ swap between layout types ('card' and 'resume') @done(22-09-26 19:38)
+
 other:
     ☐ create another cv component
     ✔ refactor the business card @done(22-09-26 19:16)
         print more than one card on a page
         front and back layouts/ sides / versions
-    ☐ color input
-    ☐ input for uploading an image to the previewed layout
-        used for the alternate cv and maybe for business card logos
-    ☐ swap between layout types
